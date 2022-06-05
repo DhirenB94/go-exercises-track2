@@ -46,7 +46,6 @@ func init() {
 }
 
 func main() {
-	handler := http.HandlerFunc(PostServer)
-	http.Handle("/posts", handler)
-	http.ListenAndServe(":8080", http.DefaultServeMux)
+	server := NewPostServer()
+	http.ListenAndServe(":8080", server)
 }

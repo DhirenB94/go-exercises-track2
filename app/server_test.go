@@ -10,11 +10,12 @@ import (
 )
 
 func TestGetPosts(t *testing.T) {
+	server := NewPostServer()
 	t.Run("returns posts", func(t *testing.T) {
 		req, _ := http.NewRequest(http.MethodGet, "/posts", nil)
 		res := httptest.NewRecorder()
 
-		PostServer(res, req)
+		server.ServeHTTP(res, req)
 
 		got := PostLists
 
