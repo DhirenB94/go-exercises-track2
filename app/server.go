@@ -6,18 +6,15 @@ import (
 )
 
 type PostServer struct {
-	router *http.ServeMux
+	http.Handler
 }
 
 func NewPostServer() *PostServer {
-	p := &PostServer{router: http.NewServeMux()}
-	p.router.Handle("/posts", http.HandlerFunc(p.postsHandler))
-
+	p := new(PostServer)
+	router := http.NewServeMux()
+	router.Handle("/posts", http.HandlerFunc(p.postsHandler))
+	p.Handler = router
 	return p
-}
-
-func (p *PostServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	p.router.ServeHTTP(w, r)
 }
 
 func (p *PostServer) postsHandler(w http.ResponseWriter, r *http.Request) {
