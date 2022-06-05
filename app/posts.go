@@ -2,6 +2,8 @@ package main
 
 import "time"
 
+var PostLists []Posts
+
 type Posts struct {
 	Id          string    `json:"id"`
 	Title       string    `json:"title"`

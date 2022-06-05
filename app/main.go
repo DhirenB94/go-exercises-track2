@@ -1,5 +1,10 @@
 package main
 
+import (
+	"encoding/json"
+	"log"
+)
+
 func init() {
 	postsJSON := `[
 	  {
@@ -33,6 +38,10 @@ func init() {
 		}
 	  }
 ]`
+	err := json.Unmarshal([]byte(postsJSON), &PostLists)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func main() {
