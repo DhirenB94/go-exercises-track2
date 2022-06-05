@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"log"
+	"net/http"
 )
 
 func init() {
@@ -45,5 +46,7 @@ func init() {
 }
 
 func main() {
-
+	handler := http.HandlerFunc(PostServer)
+	http.Handle("/posts", handler)
+	http.ListenAndServe(":8080", http.DefaultServeMux)
 }

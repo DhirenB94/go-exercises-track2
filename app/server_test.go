@@ -16,7 +16,7 @@ func TestGetPosts(t *testing.T) {
 
 		PostServer(res, req)
 
-		var got []Posts
+		got := PostLists
 
 		err := json.NewDecoder(res.Body).Decode(&got)
 		if err != nil {
@@ -25,5 +25,6 @@ func TestGetPosts(t *testing.T) {
 
 		assert.NotEmpty(t, res.Body, "empty response")
 		assert.Equal(t, http.StatusOK, res.Code, "status should equal 200")
+		assert.Len(t, PostLists, 3, "should return 3 posts")
 	})
 }
