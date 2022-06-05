@@ -20,9 +20,7 @@ func TestGetPosts(t *testing.T) {
 		got := PostLists
 
 		err := json.NewDecoder(res.Body).Decode(&got)
-		if err != nil {
-			t.Fatalf("unable to parse response from server %q into slice of Posts, '%v'", res.Body, err)
-		}
+		assert.NoError(t, err)
 
 		assert.NotEmpty(t, res.Body, "empty response")
 		assert.Equal(t, http.StatusOK, res.Code, "status should equal 200")
